@@ -154,3 +154,37 @@ b {
   font-weight: 400;
   margin-left: 3px;
 }
+
+@media screen and (max-width: 768px) {
+  .stacklights,
+  .barcodeChecker,
+  .roller,
+  .panel,
+  .dashboard,
+  .mainComponents,
+  .subComponents,
+  .app {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .stacklights {
+    margin-top: 70px;
+    margin-bottom: 30px;
+  }
+
+  .stacklights,
+  .barcodeChecker,
+  .roller,
+  .panel,
+  .dashboard {
+    box-shadow: inset 0 -10px 10px rgba(69, 181, 255, 0.2);
+  }
+}
+
