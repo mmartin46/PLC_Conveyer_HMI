@@ -156,9 +156,7 @@ function App() {
           <div className='roller text-align white_bg'>
             <Roller/>
           </div>
-        </div>
 
-        <div className='subComponents'>
           <div className='dashboard white_bg'>
             <p className='other_title'>Data Transmission Monitor</p>
             <p className='bullet'><b className='get'>- GET Request</b></p>

@@ -39,13 +39,12 @@
 
 .barcodeChecker {
   background-color: rgba(250, 250, 250, 90);
-  padding: 20px;
+  /* padding: 20px; */
   /* border-radius: 20px; */
-  margin-top: 30px;
   flex-direction: column;
-  justify-content: left;
-  align-items: left;
-  width: 400px;
+  /* justify-content: left;
+  align-items: left; */
+  /* width: 300px; */
   text-align: center;
   /* border-radius: 10px; */
 
@@ -54,17 +53,15 @@
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
 }
 
+
 .roller {
   background-color: rgba(255, 255, 255, 100);
   /* border-radius: 20px; */
-  margin: auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 70%;
   overflow: auto;
   padding: 20px;
-  margin-left: 20px;
   /* border-radius: 10px; */
 
   box-shadow: inset 0 -10px 10px rgba(69, 181, 255, 0.2);
@@ -74,14 +71,13 @@
 .mainComponents {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  padding: 30px;
+  
 }
 
 .app {
-  padding-left: 2%;
   padding-top: 17%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 
@@ -89,14 +85,6 @@
   background-color: aqua;
 }
 
-.subComponents {
-  display: flex;
-  width: 150%;
-  height: auto;
-  align-self: flex-end;
-  padding-right: 50px;
-  justify-content: space-between;
-}
 
 .panel {
   display: flex;
@@ -155,7 +143,7 @@ b {
   margin-left: 3px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
   .stacklights,
   .barcodeChecker,
   .roller,
@@ -179,10 +167,18 @@ b {
     margin-bottom: 30px;
   }
 
+  .dashboard {
+    margin-top: 30px;
+  }
+
+  .panel {
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  }
+
+
   .stacklights,
   .barcodeChecker,
   .roller,
-  .panel,
   .dashboard {
     box-shadow: inset 0 -10px 10px rgba(69, 181, 255, 0.2);
   }
