@@ -1,0 +1,32 @@
+.invalid {
+    color: rgb(147, 0, 0);
+    font-weight: 400;
+    font-size: small;
+}
+
+.success {
+    color: rgb(76, 207, 255);
+    font-weight: 400;
+    font-size: small;
+}
+
+.invalid, .success {
+    padding-left: 5px;
+    transition-duration: .9s;
+}
+
+.invalid:hover {
+    cursor: pointer;
+    background-color: rgb(255, 215, 215);
+    border-radius: 20px;
+    padding: 5px;
+    translate: 5px;
+}
+
+.success:hover {
+    cursor: pointer;
+    background-color: rgb(215, 255, 255);
+    border-radius: 20px;
+    padding: 5px;
+    translate: 5px;
+}
