@@ -25,18 +25,21 @@ function App() {
   });
 
   const [imageSrc, setImageSrc] = useState('src/data_chart.png')
+  const [GETNum, setGETNum] = useState(null);
+  const [POSTNum, setPOSTNum] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       updateMonitor();
-    }, 500);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
   const updateMonitor = () => {
     console.log('Updating chart...')
-    setImageSrc('src/data_chart.png')
+    const randNum = Math.floor(Math.random() * 100);
+    setImageSrc(`src/data_chart.png?${randNum}`);
   }
 
 
@@ -76,7 +79,35 @@ function App() {
   };
 
 
-  const lightClickedHandler = (color) => {
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updateMonitor();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+  
+
+  const getRequestStats = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/get-request-stats');
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch http data');
+      }
+      const data = await response.json();
+
+      console.log('hey')
+
+      setGETNum(data['GET']);
+      setPOSTNum(data['POST']);
+    } catch (error) {
+      console.error('Failed to connect', error);
+    }
+  }
+  
+
+  const lightClickedHandler = async (color) => {
     setLights(prevLights => {
       // Gets the previous light clicked
       // and constrasts it with the new light.
@@ -94,9 +125,11 @@ function App() {
           handleLightOn(color, 0);
         }
       }
-      
+
       return newLights;
     });
+
+    await getRequestStats();
   };
   
   // If a light was pressed change to a different light
@@ -132,8 +165,8 @@ function App() {
             <p className='bullet'><b className='post'>- POST Request</b></p>
             <img className='dataImg' src={imageSrc}></img>
             <p className='other_title caption'>Number Of Requests:</p>
-            <p className='other_title caption'>Get Requests:</p>
-            <p className='other_title caption'>Post Requests:</p>
+            <p className='other_title caption'>Get Requests: <span className='msg'>{GETNum}</span></p>
+            <p className='other_title caption'>Post Requests: <span className='msg'>{POSTNum}</span></p>
           </div>
         </div>
       </div>

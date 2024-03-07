@@ -233,6 +233,23 @@ def get_plc_data():
         return jsonify({'error', str(e)})
 
 
+@app.route('/get-request-stats', methods=['GET'])
+def get_request_stats():
+    try:
+        global get_counter, post_counter
+        
+        print('hey')
+        
+        data = {
+            'GET' : get_counter,
+            'POST' : post_counter 
+        }
+        
+        return jsonify(data), 200
+    except Exception as e:
+        return jsonify({'error', str(e)})
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
