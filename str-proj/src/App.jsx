@@ -162,11 +162,16 @@ function App() {
             <p className='bullet'><b className='get'>- GET Request</b></p>
             <p className='bullet'><b className='post'>- POST Request</b></p>
             <img className='dataImg' src={imageSrc}></img>
-            <p className='other_title caption'>Number Of Requests:</p>
+            <p className='other_title caption'>Number Of Requests: <span className='msg'>{GETNum + POSTNum}</span></p>
             <p className='other_title caption'>Get Request Count: <span className='msg'>{GETNum}</span></p>
             <p className='other_title caption'>Post Request Count: <span className='msg'>{POSTNum}</span></p>
           </div>
         </div>
+
+        <div className='bottomComponents white_bg'>
+          <p className='center_text other_title'>Button Panel</p>
+        </div>
+
       </div>
 
     </div>
