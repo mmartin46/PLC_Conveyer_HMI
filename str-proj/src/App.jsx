@@ -36,9 +36,10 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const updateMonitor = () => {
+  const updateMonitor = async () => {
     console.log('Updating chart...')
     const randNum = Math.floor(Math.random() * 100);
+    await getRequestStats();
     setImageSrc(`src/data_chart.png?${randNum}`);
   }
 
@@ -129,7 +130,6 @@ function App() {
       return newLights;
     });
 
-    await getRequestStats();
   };
   
   // If a light was pressed change to a different light
@@ -163,8 +163,8 @@ function App() {
             <p className='bullet'><b className='post'>- POST Request</b></p>
             <img className='dataImg' src={imageSrc}></img>
             <p className='other_title caption'>Number Of Requests:</p>
-            <p className='other_title caption'>Get Requests: <span className='msg'>{GETNum}</span></p>
-            <p className='other_title caption'>Post Requests: <span className='msg'>{POSTNum}</span></p>
+            <p className='other_title caption'>Get Request Count: <span className='msg'>{GETNum}</span></p>
+            <p className='other_title caption'>Post Request Count: <span className='msg'>{POSTNum}</span></p>
           </div>
         </div>
       </div>
