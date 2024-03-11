@@ -12,6 +12,7 @@ class Info extends Component {
             plcPort: 'N/A',
             plcTime: 'N/A'
         };
+        this.setState = this.setState.bind(this);
     }
 
     componentDidMount() {
@@ -27,7 +28,7 @@ class Info extends Component {
         clearInterval(this.intervalId);
     }
 
-    async getPLCInfo() {
+    getPLCInfo = async () => {
         try {
             const response = await fetch('http://localhost:5000/get-plc-data');
         
@@ -58,7 +59,7 @@ class Info extends Component {
 
         return (
             <div className='info'>
-                <p className='bool_light header' onClick={this.getPLCInfo()}>Conveyer Updates:</p>
+                <p className='bool_light header' onClick={this.getPLCInfo}>Conveyer Updates:</p>
                 <p className='bool_light bold'>Conveyer Full: <p className="bool_light light"> {conveyerFull}</p></p>
                 <p className='bool_light bold'>Scanner On: <p className="bool_light light"> {scannerOn}</p></p>
                 <p className='bool_light bold'>PLC Info.: <p className="bool_light light"> {plcInformation}</p></p>
