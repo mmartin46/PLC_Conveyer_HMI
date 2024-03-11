@@ -237,9 +237,7 @@ def get_plc_data():
 def get_request_stats():
     try:
         global get_counter, post_counter
-        
-        print('hey')
-        
+
         data = {
             'GET' : get_counter,
             'POST' : post_counter 
@@ -249,6 +247,32 @@ def get_request_stats():
     except Exception as e:
         return jsonify({'error', str(e)})
 
+
+def run_script(comm):
+    ret = comm.Read('TestScriptCall')
+    
+    if ret.Value == 1:
+        comm.Write('TestScriptCall', 0)
+    elif ret.Value == 0:
+        comm.Write('TestScriptCall', 1)
+
+@app.route('/display-lights', methods=['GET'])
+def display_lights():
+    try:
+        global get_counter, post_counter
+        get_counter += 1
+        write_to_file(datetime.now().time(), get_counter, post_counter)
+
+        with PLC() as comm:
+            comm.IPAddress = IP_ADDRESS
+            run_script(comm)
+            
+            data = {
+                'success': 200
+            }
+        return jsonify(data), 200
+    except Exception as e:
+        return jsonify({'error', str(e)});
 
 if __name__ == '__main__':
     app.run(debug=True)

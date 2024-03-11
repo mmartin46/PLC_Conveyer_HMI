@@ -37,6 +37,10 @@
   padding: 20px;
 }
 
+.btn {
+  margin-top: auto;
+}
+
 .barcodeChecker {
   background-color: rgba(250, 250, 250, 90);
   /* padding: 20px; */
@@ -68,7 +72,6 @@
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
 }
 
-.bottomComponents,
 .mainComponents {
   display: flex;
   flex-direction: row;
@@ -98,10 +101,11 @@
   padding-top: 17%;
 }
 
-.bottomComponents.white_bg {
+.bottomComponents > * {
   display: flex;
   align-content: center;
   justify-content: center;
+  flex-direction: row;
 }
 
 
@@ -160,6 +164,23 @@ b {
 .caption {
   font-size: small;
   margin: 0%;
+}
+
+.row {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.col > * {
+  align-content: center;
+  margin-right: 20px;
+}
+
+.col {
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
 
 .msg {

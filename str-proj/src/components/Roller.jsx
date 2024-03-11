@@ -15,7 +15,7 @@ const Roller = () => {
             try {
                 const response = await fetch('http://localhost:5000/zone-check');
                 if (!response.ok) {
-                    throw new Error('Failed to fetch zones')
+                    throw new Error('Failed to fetch zones');
                 }
 
                 const data = await response.json();

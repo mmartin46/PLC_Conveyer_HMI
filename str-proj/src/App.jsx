@@ -4,6 +4,8 @@ import Button from './components/Button';
 import Barcode from './components/Barcode';
 import Roller from './components/Roller'
 import 'bootstrap/dist/css/bootstrap.css'
+import TestButton from './components/TestButton';
+import TestScriptButton from './components/TestScriptButton';
 
 // Colors that specify when the
 // button has been toggled on or off.
@@ -170,6 +172,13 @@ function App() {
 
         <div className='bottomComponents white_bg'>
           <p className='center_text other_title'>Button Panel</p>
+
+          <div className="row">
+            <div className='col'>
+              <TestScriptButton/>
+            </div>
+          </div>
+
         </div>
 
       </div>

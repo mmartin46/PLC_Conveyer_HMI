@@ -1,0 +1,14 @@
+h6 {
+    background-color: rgb(0, 208, 255);
+    padding: 50px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    transition-duration: 0.1s;
+    color: rgb(255, 255, 255);
+}
+
+h6:active {
+    background-color: rgb(10, 186, 225);
+    translate: 0 5px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
