@@ -14,6 +14,7 @@ class TestScriptButton extends Component {
         this.showLights = this.showLights.bind(this);
     }
 
+
     connectToPLC = async () => {
         try {
             const response = await fetch('http://localhost:5000/display-lights');

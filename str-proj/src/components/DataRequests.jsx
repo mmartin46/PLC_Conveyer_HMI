@@ -26,6 +26,8 @@ class DataRequests extends Component {
         this.updateMonitor();
       }, 5000);
     }
+
+    // Clears the interval right before unmounting
     componentWillUnmount() {
         clearInterval(this.interval);
     }
@@ -39,44 +41,44 @@ class DataRequests extends Component {
     }
   
 
-  getRequestStats = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/get-request-stats');
+    getRequestStats = async () => {
+        try {
+        const response = await fetch('http://localhost:5000/get-request-stats');
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch http data');
-      }
-      const data = await response.json();
+        if (!response.ok) {
+            throw new Error('Failed to fetch http data');
+        }
+        const data = await response.json();
 
 
-      this.setState({ GETNum : data['GET'] });
-      this.setState({ POSTNum : data['POST']});
-    } catch (error) {
-      console.error('Failed to connect', error);
-    }
-  }  
+        this.setState({ GETNum : data['GET'] });
+        this.setState({ POSTNum : data['POST']});
+        } catch (error) {
+        console.error('Failed to connect', error);
+        }
+    }  
 
-  render() {
-        const { imageSrc, GETNum, POSTNum, dataRequestList } = this.state;
-        return (
-            <div>
-                <img className='dataImg' src={imageSrc}></img>
-                {dataRequestList.map((dataRequest) => {
-                    let reqCount = 0;
-                    if (dataRequest.value === 'G') {
-                        reqCount = GETNum;
-                    } else if (dataRequest.value === 'P') {
-                        reqCount = POSTNum;
-                    } else {
-                        reqCount = GETNum + POSTNum;
-                    }
-                    return (
-                        <p className='other_title caption' key={dataRequest.id}>{dataRequest.caption} <span className='msg'>{reqCount}</span></p>
-                    );
-                })}
-            </div>
-        );
-    }
+    render() {
+            const { imageSrc, GETNum, POSTNum, dataRequestList } = this.state;
+            return (
+                <div>
+                    <img className='dataImg' src={imageSrc}></img>
+                    {dataRequestList.map((dataRequest) => {
+                        let reqCount = 0;
+                        if (dataRequest.value === 'G') {
+                            reqCount = GETNum;
+                        } else if (dataRequest.value === 'P') {
+                            reqCount = POSTNum;
+                        } else {
+                            reqCount = GETNum + POSTNum;
+                        }
+                        return (
+                            <p className='other_title caption' key={dataRequest.id}>{dataRequest.caption} <span className='msg'>{reqCount}</span></p>
+                        );
+                    })}
+                </div>
+            );
+        }
 };
 
 export default DataRequests;
