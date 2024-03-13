@@ -23,14 +23,9 @@ function App() {
         <div className='mainComponents'>
           <div className='stacklights white_bg'>
             <p className='title header'>Stack Lights</p>
-
-            {/* Rendering the button list*/}
-            {/* {buttonList.map((button) => (
-              <Button id={button.id} w={button.w} h ={button.h} c={colorForClick(button.color)} text={button.text} onClick={() => lightClickedHandler(button.color)} /> 
-            ))} */}
             <ButtonList/>
-          
           </div>
+
           <div className='roller text-align white_bg'>
             <Roller/>
           </div>
@@ -39,8 +34,6 @@ function App() {
             <p className='other_title'>Data Transmission Monitor</p>
             <p className='bullet'><b className='get'>- GET Request</b></p>
             <p className='bullet'><b className='post'>- POST Request</b></p>
-
-
             <DataRequests/>
           </div>
         </div>

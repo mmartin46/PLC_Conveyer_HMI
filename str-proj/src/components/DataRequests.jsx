@@ -3,10 +3,15 @@ import 'bootstrap/dist/css/bootstrap.css'
 import '../App.css'
 
 const DataRequests = () => {
+
+    // Represents the graph being updated
     const [imageSrc, setImageSrc] = useState('../src/data_chart.png')
+    // Number of GET requests
     const [GETNum, setGETNum] = useState(null);
+    // Number of POST requestd
     const [POSTNum, setPOSTNum] = useState(null);
   
+    // Sets an interval for 5000ms and updates the monitor
     useEffect(() => {
       const interval = setInterval(() => {
         updateMonitor();
@@ -15,20 +20,13 @@ const DataRequests = () => {
       return () => clearInterval(interval);
     }, []);
   
+    // Sets the image to a different image each time.
     const updateMonitor = async () => {
       console.log('Updating chart...')
       const randNum = Math.floor(Math.random() * 100);
       await getRequestStats();
       setImageSrc(`../src/data_chart.png?${randNum}`);
     }
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      updateMonitor();
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
   
 
   const getRequestStats = async () => {

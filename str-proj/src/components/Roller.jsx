@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 const Roller = () => {
     const [zoneStatus, setZoneStatus] = useState([]);
-    const [isFull, setIsFull] = useState(null);
 
     useEffect(() => {
         const connectToPLC = async () => {
