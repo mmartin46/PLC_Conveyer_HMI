@@ -1,35 +1,45 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../App.css'
 
-const DataRequests = () => {
+class DataRequests extends Component {
+    constructor(props) {
+        super(props);
 
-    // Represents the graph being updated
-    const [imageSrc, setImageSrc] = useState('../src/data_chart.png')
-    // Number of GET requests
-    const [GETNum, setGETNum] = useState(null);
-    // Number of POST requestd
-    const [POSTNum, setPOSTNum] = useState(null);
+        this.state = {
+            imageSrc : '../src/data_chart.png', // Represents the graph being updated
+            GETNum : 0, // Number of GET requests
+            POSTNum : 0, // Number of POST requests
+            dataRequestList : [   // Handles presentation of GET and POST requests
+                { id : 'numRequests', caption : 'Number of Requests:', value : 'GP' },
+                { id : 'numGetRequests', caption : 'Get Request Count:', value : 'G'},
+                { id : 'numPostRequests', caption : 'Post Request Count:', value : 'P' }
+            ]
+        };
+
+        this.updateMonitor = this.updateMonitor.bind(this);
+    }
   
     // Sets an interval for 5000ms and updates the monitor
-    useEffect(() => {
-      const interval = setInterval(() => {
-        updateMonitor();
+    componentDidMount() {
+        this.interval = setInterval(() => {
+        this.updateMonitor();
       }, 5000);
-  
-      return () => clearInterval(interval);
-    }, []);
+    }
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
   
     // Sets the image to a different image each time.
-    const updateMonitor = async () => {
+    updateMonitor = async () => {
       console.log('Updating chart...')
       const randNum = Math.floor(Math.random() * 100);
-      await getRequestStats();
-      setImageSrc(`../src/data_chart.png?${randNum}`);
+      await this.getRequestStats();
+      this.setState({ imageSrc : `../src/data_chart.png?${randNum}` });
     }
   
 
-  const getRequestStats = async () => {
+  getRequestStats = async () => {
     try {
       const response = await fetch('http://localhost:5000/get-request-stats');
 
@@ -38,40 +48,35 @@ const DataRequests = () => {
       }
       const data = await response.json();
 
-      console.log('hey')
 
-      setGETNum(data['GET']);
-      setPOSTNum(data['POST']);
+      this.setState({ GETNum : data['GET'] });
+      this.setState({ POSTNum : data['POST']});
     } catch (error) {
       console.error('Failed to connect', error);
     }
   }  
 
-  // Handles presentation of GET and POST requests
-  const [dataRequestList, setDataRequestList] = useState([
-    { id : 'numRequests', caption : 'Number of Requests:', value : 'GP' },
-    { id : 'numGetRequests', caption : 'Get Request Count:', value : 'G'},
-    { id : 'numPostRequests', caption : 'Post Request Count:', value : 'P' }
-  ]);
-
-  return (
-    <div>
-        <img className='dataImg' src={imageSrc}></img>
-        {dataRequestList.map((dataRequest) => {
-            let reqCount = 0;
-            if (dataRequest.value === 'G') {
-                reqCount = GETNum;
-            } else if (dataRequest.value === 'P') {
-                reqCount = POSTNum;
-            } else {
-                reqCount = GETNum + POSTNum;
-            }
-            return (
-                <p className='other_title caption' key={dataRequest.id}>{dataRequest.caption} <span className='msg'>{reqCount}</span></p>
-            );
-        })}
-    </div>
-  );
+  render() {
+        const { imageSrc, GETNum, POSTNum, dataRequestList } = this.state;
+        return (
+            <div>
+                <img className='dataImg' src={imageSrc}></img>
+                {dataRequestList.map((dataRequest) => {
+                    let reqCount = 0;
+                    if (dataRequest.value === 'G') {
+                        reqCount = GETNum;
+                    } else if (dataRequest.value === 'P') {
+                        reqCount = POSTNum;
+                    } else {
+                        reqCount = GETNum + POSTNum;
+                    }
+                    return (
+                        <p className='other_title caption' key={dataRequest.id}>{dataRequest.caption} <span className='msg'>{reqCount}</span></p>
+                    );
+                })}
+            </div>
+        );
+    }
 };
 
 export default DataRequests;
