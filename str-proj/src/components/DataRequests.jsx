@@ -7,7 +7,7 @@ class DataRequests extends Component {
         super(props);
 
         this.state = {
-            imageSrc : '../public/data_chart.png', // Represents the graph being updated
+            imageSrc : 'data_chart.png', // Represents the graph being updated
             GETNum : 0, // Number of GET requests
             POSTNum : 0, // Number of POST requests
             dataRequestList : [   // Handles presentation of GET and POST requests
@@ -37,7 +37,7 @@ class DataRequests extends Component {
       console.log('Updating chart...')
       const randNum = Math.floor(Math.random() * 100);
       await this.getRequestStats();
-      this.setState({ imageSrc : `../public/data_chart.png?${randNum}` });
+      this.setState({ imageSrc : `data_chart.png?${randNum}` });
     }
   
 
