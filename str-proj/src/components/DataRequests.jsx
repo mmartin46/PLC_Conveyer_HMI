@@ -43,7 +43,7 @@ class DataRequests extends Component {
 
     getRequestStats = async () => {
         try {
-        const response = await fetch('http://localhost:5000/get-request-stats');
+        const response = await fetch('http://192.168.0.254:8081/get-request-stats');
 
         if (!response.ok) {
             throw new Error('Failed to fetch http data');

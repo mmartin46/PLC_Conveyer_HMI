@@ -43,7 +43,7 @@ function App() {
 
           <div className="row">
             <div className='col'>
-              <APIButton api="http://localhost:5000/display-lights"
+              <APIButton api="http://192.168.0.254:8081/display-lights"
                                 failMessage="Failed to fetch data"
                                 catchMessage="Failed to display lights"/>
             </div>

@@ -21,7 +21,7 @@ const Barcode = () => {
         setBarcode('N/A')
 
         try {
-            const response = await fetch('http://localhost:5000/grab-barcode');
+            const response = await fetch('http://192.168.0.254:8081/grab-barcode');
             if (!response.ok) {
                 throw new Error('Failed to fetch barcode');
             }

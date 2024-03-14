@@ -30,7 +30,7 @@ class Info extends Component {
 
     getPLCInfo = async () => {
         try {
-            const response = await fetch('http://localhost:5000/get-plc-data');
+            const response = await fetch('http://192.168.0.254:8081/get-plc-data');
         
             if (!response.ok) {
                 throw new Error('Failed to fetch PLC data');

@@ -35,7 +35,7 @@ const ButtonList = () => {
   // and off based on their value.
   const connectToPLC = async (color, value) => {
     try {
-      const response = await fetch('http://localhost:5000/connect-to-plc', {
+      const response = await fetch('http://192.168.0.254:8081/connect-to-plc', {
         method: 'POST',
         headers : {
           'Content-Type': 'application/json'

@@ -275,5 +275,5 @@ def display_lights():
         return jsonify({'error', str(e)});
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='192.168.0.254', port=8081)
 

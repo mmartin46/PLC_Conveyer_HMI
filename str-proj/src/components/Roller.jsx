@@ -12,7 +12,7 @@ const Roller = () => {
     useEffect(() => {
         const connectToPLC = async () => {
             try {
-                const response = await fetch('http://localhost:5000/zone-check');
+                const response = await fetch('http://192.168.0.254:8081/zone-check');
                 if (!response.ok) {
                     throw new Error('Failed to fetch zones');
                 }
