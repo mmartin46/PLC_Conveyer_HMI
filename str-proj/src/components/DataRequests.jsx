@@ -20,7 +20,7 @@ class DataRequests extends Component {
         this.updateMonitor = this.updateMonitor.bind(this);
     }
   
-    // Sets an interval for 5000ms and updates the monitor
+    // Sets an interval for 5000000ms and updates the monitor
     componentDidMount() {
         this.interval = setInterval(() => {
         this.updateMonitor();
@@ -34,25 +34,25 @@ class DataRequests extends Component {
   
     // Sets the image to a different image each time.
     updateMonitor = async () => {
-      console.log('Updating chart...')
-      const randNum = Math.floor(Math.random() * 100);
+      console.log('Updating chart...');
+      const timeStamp = Date.now();
       await this.getRequestStats();
-      this.setState({ imageSrc : `data_chart.png?${randNum}` });
+      this.setState({ imageSrc : `data_chart.png?${timeStamp}` });
     }
-  
+
 
     getRequestStats = async () => {
         try {
-        const response = await fetch('http://192.168.0.254:8081/get-request-stats');
+            const response = await fetch('http://192.168.0.254:8081/get-request-stats');
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch http data');
-        }
-        const data = await response.json();
+            if (!response.ok) {
+                throw new Error('Failed to fetch http data');
+            }
+            const data = await response.json();
 
 
-        this.setState({ GETNum : data['GET'] });
-        this.setState({ POSTNum : data['POST']});
+            this.setState({ GETNum : data['GET'] });
+            this.setState({ POSTNum : data['POST']});
         } catch (error) {
         console.error('Failed to connect', error);
         }
