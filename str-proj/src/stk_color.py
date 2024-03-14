@@ -62,7 +62,7 @@ def make_chart():
             plt.xlabel(None)
             plt.tight_layout()
             plt.ioff()
-            plt.savefig('data_chart.png')
+            plt.savefig('../dist/data_chart.png')
     else:
         with open('get_post_req.csv', mode='w', newline='') as f:
             f.write('')
