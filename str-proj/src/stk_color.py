@@ -48,7 +48,7 @@ zones_addresses = [
  ]
 
 def make_chart():
-    df = pd.read_csv('get_post_req.csv', names=['Time', 'GET', 'POST'])
+    df = pd.read_csv('../public/get_post_req.csv', names=['Time', 'GET', 'POST'])
     
     if len(df) <= 500:
         df['Time'] = pd.to_datetime(df['Time'], format='%H:%M:%S.%f')
@@ -62,14 +62,14 @@ def make_chart():
             plt.xlabel(None)
             plt.tight_layout()
             plt.ioff()
-            plt.savefig('data_chart.png')
+            plt.savefig('../public/data_chart.png')
     else:
-        with open('get_post_req.csv', mode='w', newline='') as f:
+        with open('../public/get_post_req.csv', mode='w', newline='') as f:
             f.write('')
 
 
 def write_to_file(time, get_count, post_count):
-    with open('get_post_req.csv', mode='a', newline='') as f:
+    with open('../public/get_post_req.csv', mode='a', newline='') as f:
         writer = csv.writer(f)
         writer.writerow([time, get_count, post_count])
     make_chart()
