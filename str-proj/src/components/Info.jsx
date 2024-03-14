@@ -36,9 +36,6 @@ class Info extends Component {
                 throw new Error('Failed to fetch PLC data');
             }
             const data = await response.json();
-
-            console.log(data)
-
             // Setting the data.
             this.setState({
                 conveyerFull: data['conveyer_full'],

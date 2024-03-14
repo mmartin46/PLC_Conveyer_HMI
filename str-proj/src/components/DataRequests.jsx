@@ -34,7 +34,6 @@ class DataRequests extends Component {
   
     // Sets the image to a different image each time.
     updateMonitor = async () => {
-      console.log('Updating chart...');
       const timeStamp = Date.now();
       await this.getRequestStats();
       this.setState({ imageSrc : `data_chart.png?${timeStamp}` });

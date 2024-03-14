@@ -23,7 +23,7 @@ const Roller = () => {
                 
                 let i;
 
-                console.log(data)
+                console.log(data);
                 for (i = 1; i <= 5; i++) {
                     const zoneName = `Zone ${i}`;
                     let zoneValue = data[zoneName]['value'];
