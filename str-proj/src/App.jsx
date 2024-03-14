@@ -5,13 +5,14 @@ import Barcode from './components/Barcode';
 import Roller from './components/Roller'
 import 'bootstrap/dist/css/bootstrap.css'
 import TestButton from './components/TestButton';
-import TestScriptButton from './components/TestScriptButton';
+import APIButton from './components/APIButton';
 import ButtonList from './components/ButtonList'
 import DataRequests from './components/DataRequests';
-
+import DataMonitorTags from './components/DataMonitorTags'
 
 
 function App() {
+
 
   return (
     <div className='realApp'>
@@ -32,8 +33,7 @@ function App() {
 
           <div className='dashboard white_bg'>
             <p className='other_title'>Data Transmission Monitor</p>
-            <p className='bullet'><b className='get'>- GET Request</b></p>
-            <p className='bullet'><b className='post'>- POST Request</b></p>
+            <DataMonitorTags/>
             <DataRequests/>
           </div>
         </div>
@@ -43,7 +43,9 @@ function App() {
 
           <div className="row">
             <div className='col'>
-              <TestScriptButton/>
+              <APIButton api="http://localhost:5000/display-lights"
+                                failMessage="Failed to fetch data"
+                                catchMessage="Failed to display lights"/>
             </div>
           </div>
 

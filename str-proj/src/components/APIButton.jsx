@@ -2,7 +2,7 @@ import { Component } from "react";
 import TestButton from "./TestButton";
 
 
-class TestScriptButton extends Component {
+class APIButton extends Component {
 
     constructor(props) {
         super(props)
@@ -11,20 +11,24 @@ class TestScriptButton extends Component {
             title : 'Test Lights'
         };
 
+        this.api = props.api;
+        this.failMessage = props.failMessage;
+        this.catchMessage = props.catchMessage;
+
         this.showLights = this.showLights.bind(this);
     }
 
 
     connectToPLC = async () => {
         try {
-            const response = await fetch('http://localhost:5000/display-lights');
+            const response = await fetch(String(this.api));
             if (!response.ok) {
-                throw new Error('Failed to fetch data');
+                throw new Error(String(this.failMessage));
             }
 
             const data = await response.json();
         } catch (error) {
-            console.log('Failed to display lights', error);
+            console.log(String(this.catchMessage), error);
         }
     }
 
@@ -41,4 +45,4 @@ class TestScriptButton extends Component {
         />);
     }
 };
-export default TestScriptButton;
+export default APIButton;

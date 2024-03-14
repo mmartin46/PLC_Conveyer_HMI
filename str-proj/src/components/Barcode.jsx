@@ -5,6 +5,18 @@ import './Barcode.css'
 const Barcode = () => {
     const [barcode, setBarcode] = useState(null);
 
+    const sameCharacter = (myString) => {
+        let firstChar = myString.charAt(0);
+
+        for (let i = 0; i < myString.length; i += 1) {
+            if (myString.charAt(i) != firstChar) {
+                return false;
+            }
+        }
+        return true;
+    };
+
+
     const getBarcodeFromPLC = async() => {
         setBarcode('N/A')
 
@@ -14,7 +26,12 @@ const Barcode = () => {
                 throw new Error('Failed to fetch barcode');
             }
             const data = await response.json();
-            setBarcode(data.barcode);
+            
+            if (sameCharacter(data.barcode)) {
+                setBarcode('N/A');
+            } else {
+                setBarcode(data.barcode);
+            }
         } catch (error) {
             setBarcode('N/A');
         }
