@@ -6,7 +6,7 @@ import './Roller.css'
 import 'bootstrap/dist/css/bootstrap.css'
 
 
-class Roller extends Component {
+class Roller extends React.Component {
     constructor(props) {
         super(props);
     
@@ -14,63 +14,68 @@ class Roller extends Component {
             zoneStatus : []
         };
     }
-    const [zoneStatus, setZoneStatus] = useState([]);
 
-    useEffect(() => {
-        const connectToPLC = async () => {
-            try {
-                const response = await fetch('http://192.168.0.254:8081/zone-check');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch zones');
-                }
-
-                const data = await response.json();
-
-                const zoneStatusList = [];
-                
-                let i;
-
-                console.log(data);
-                for (i = 1; i <= 5; i++) {
-                    const zoneName = `Zone ${i}`;
-                    let zoneValue = data[zoneName]['value'];
-                    zoneStatusList.push(zoneValue);
-                }
-
-                setZoneStatus(zoneStatusList);
-            } catch (error) {
-                console.log({error});
-            }
-        };
-
-        connectToPLC();
-
-
+    componentDidMount() {
         // Updates every second.
-        const intervalId = setInterval(connectToPLC, 1000);
+        this.intervalId = setInterval(this.connectToPLC, 1000);
+    }
 
+    componentWillUnmount() {
         // Cleans up
-        return () => clearInterval(intervalId);
-    }, []);
+        return () => clearInterval(this.intervalId);
+    }
 
+    connectToPLC = async () => {
+        try {
+            const response = await fetch('http://192.168.0.254:8081/zone-check');
+            if (!response.ok) {
+                throw new Error('Failed to fetch zones');
+            }
 
-    return (
-        <div className='wholeRoller'>
-            <p className='title header' onClick={zoneStatus}>Conveyer</p>
+            const data = await response.json();
 
-            <div className="zones title">
-                {zoneStatus.map((whichState, index) => (
-                    <div key={index}>
-                        <p>{`Zone ${index + 1}`}</p>
-                        <Tote visible={whichState}/>
-                    </div>
-                ))}
+            const zoneStatusList = [];
+                
+            let i;
+
+            console.log(data);
+            for (i = 1; i <= 5; i++) {
+                const zoneName = `Zone ${i}`;
+                let zoneValue = data[zoneName]['value'];
+                zoneStatusList.push(zoneValue);
+            }
+
+            this.setState({ zoneStatus : zoneStatusList }, () => {
+                console.log('Zones updated');
+            });
+        } catch (error) {
+            console.log({error});
+        }
+    }
+    
+    render() {
+        const { zoneStatus } = this.state;
+
+        return (
+            <div className='wholeRoller'>
+                <p className='title header' onClick={zoneStatus}>Conveyer</p>
+    
+                <div className="zones title">
+                    {zoneStatus.map((whichState, index) => (
+                        <div key={index}>
+                            <p>{`Zone ${index + 1}`}</p>
+                            <Tote visible={whichState}/>
+                        </div>
+            
+            ))}
+                </div>
+    
+                <img className="image text-center" src={rollerImage} alt="Roller" />
+                <Info/>
             </div>
+        );
+    }
 
-            <img className="image text-center" src={rollerImage} alt="Roller" />
-            <Info/>
-        </div>
-    )
 }
 
 export default Roller;

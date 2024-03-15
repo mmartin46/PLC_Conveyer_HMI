@@ -215,7 +215,7 @@ def get_plc_data():
             print('About to locate PLC Data')
             comm.IPAddress = IP_ADDRESS
             
-            sc_tag = comm.Read('Scanner:I.Status.TriggerReady')
+            sc_tag = comm.Read('Scanner_On')
             
             conv_full = comm.Read('All_Zones_On')
             
