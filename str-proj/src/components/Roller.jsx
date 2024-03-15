@@ -6,7 +6,14 @@ import './Roller.css'
 import 'bootstrap/dist/css/bootstrap.css'
 
 
-const Roller = () => {
+class Roller extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            zoneStatus : []
+        };
+    }
     const [zoneStatus, setZoneStatus] = useState([]);
 
     useEffect(() => {
