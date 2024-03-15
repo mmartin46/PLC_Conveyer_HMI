@@ -217,7 +217,7 @@ def get_plc_data():
             
             sc_tag = comm.Read('Scanner:I.Status.TriggerReady')
             
-            conv_full = comm.Read('Local:1:O.Data.5')
+            conv_full = comm.Read('All_Zones_On')
             
             data = {
                 'scan_on' : str(sc_tag.Value).upper(),
