@@ -46,7 +46,13 @@ function App() {
               <APIButton api="http://192.168.0.254:8081/display-lights"
                                 failMessage="Failed to fetch data"
                                 catchMessage="Failed to display lights"
-                                data="TestScriptCall"/>
+                                data="TestScriptCall"
+                                title="Light Check"/>
+              <APIButton api="http://192.168.0.254:8081/display-lights"
+                                failMessage="Failed to fetch data (Script 2)"
+                                catchMessage="Failed to display lights (Script 2)"
+                                data="Script_1_Run"
+                                title="Scanner Script"/>              
             </div>
           </div>
 

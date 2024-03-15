@@ -8,7 +8,7 @@ class APIButton extends Component {
         super(props)
 
         this.state = {
-            title : 'Test Lights'
+            title : props.title
         };
 
         this.api = props.api;

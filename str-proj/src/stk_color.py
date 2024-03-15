@@ -251,6 +251,7 @@ def get_request_stats():
 
 def run_script(comm, chosen_tag):
     ret = comm.Read(chosen_tag)
+    print(ret.TagName, ret.Value, ret.Status)
     
     if ret.Value == 1:
         comm.Write(chosen_tag, 0)
@@ -268,6 +269,9 @@ def display_lights():
             
             data_from_client = request.json
             comm.IPAddress = IP_ADDRESS
+            
+            print(str(request.json))
+            
             run_script(comm, data_from_client.get('data'))
             
             data = {
@@ -278,5 +282,5 @@ def display_lights():
         return jsonify({'error', str(e)});
 
 if __name__ == '__main__':
-    app.run(debug=True, host='192.168.1.95', port=8081)
+    app.run(debug=True, host='192.168.0.254', port=8081)
 
