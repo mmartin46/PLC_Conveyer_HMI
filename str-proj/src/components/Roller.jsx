@@ -30,16 +30,20 @@ const Roller = () => {
                     zoneStatusList.push(zoneValue);
                 }
 
-                console.log('Zones Used')
-                console.log(zoneStatusList);
-
                 setZoneStatus(zoneStatusList);
             } catch (error) {
                 console.log({error});
             }
-
         };
+
         connectToPLC();
+
+
+        // Updates every second.
+        const intervalId = setInterval(connectToPLC, 1000);
+
+        // Cleans up
+        return () => clearInterval(intervalId);
     }, []);
 
 
