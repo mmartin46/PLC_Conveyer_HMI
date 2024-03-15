@@ -44,7 +44,7 @@ zones_addresses = [
     'Local:1:I.Data.0',
     'Local:1:I.Data.1',
     'Local:1:I.Data.3',
-    'Local:1:I.Data.0'
+    'Local:1:I.Data.4'
  ]
 
 def make_chart():
