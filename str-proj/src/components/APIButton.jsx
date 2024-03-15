@@ -14,6 +14,7 @@ class APIButton extends Component {
         this.api = props.api;
         this.failMessage = props.failMessage;
         this.catchMessage = props.catchMessage;
+        this.data = props.data;
 
         this.showLights = this.showLights.bind(this);
     }
@@ -21,7 +22,16 @@ class APIButton extends Component {
 
     connectToPLC = async () => {
         try {
-            const response = await fetch(String(this.api));
+            const response = await fetch(String(this.api), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data : this.data })
+            });
+
+            console.log(JOSN.stringify({ data : this.data }));
+
             if (!response.ok) {
                 throw new Error(String(this.failMessage));
             }

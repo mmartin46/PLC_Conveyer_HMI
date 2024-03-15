@@ -249,24 +249,26 @@ def get_request_stats():
         return jsonify({'error', str(e)})
 
 
-def run_script(comm):
-    ret = comm.Read('TestScriptCall')
+def run_script(comm, chosen_tag):
+    ret = comm.Read(chosen_tag)
     
     if ret.Value == 1:
-        comm.Write('TestScriptCall', 0)
+        comm.Write(chosen_tag, 0)
     elif ret.Value == 0:
-        comm.Write('TestScriptCall', 1)
-
-@app.route('/display-lights', methods=['GET'])
+        comm.Write(chosen_tag, 1)
+        
+@app.route('/display-lights', methods=['POST'])
 def display_lights():
     try:
         global get_counter, post_counter
-        get_counter += 1
+        post_counter += 1
         write_to_file(datetime.now().time(), get_counter, post_counter)
 
         with PLC() as comm:
+            
+            data_from_client = request.json
             comm.IPAddress = IP_ADDRESS
-            run_script(comm)
+            run_script(comm, data_from_client.get('data'))
             
             data = {
                 'success': 200
@@ -276,5 +278,5 @@ def display_lights():
         return jsonify({'error', str(e)});
 
 if __name__ == '__main__':
-    app.run(debug=True, host='192.168.0.254', port=8081)
+    app.run(debug=True, host='192.168.1.95', port=8081)
 
