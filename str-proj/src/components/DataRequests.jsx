@@ -1,8 +1,8 @@
-import { useState, useEffect, PureComponent } from 'react';
+import { useState, useEffect, Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../App.css'
 
-class DataRequests extends PureComponent {
+class DataRequests extends Component {
     constructor(props) {
         super(props);
 
@@ -25,12 +25,6 @@ class DataRequests extends PureComponent {
         this.interval = setInterval(() => {
         this.updateMonitor();
       }, 5000);
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        return (this.state.props.imageSrc !== nextProps.imageSrc ||
-            this.state.props.GETNum !==  nextProps.GETNum ||
-            this.state.props.POSTNum !== nextProps.POSTNum);
     }
 
     // Clears the interval right before unmounting
