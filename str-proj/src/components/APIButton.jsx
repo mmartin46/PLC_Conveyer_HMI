@@ -30,7 +30,7 @@ class APIButton extends Component {
                 body: JSON.stringify({ data : this.data })
             });
 
-            console.log(JOSN.stringify({ data : this.data }));
+            console.log(JSON.stringify({ data : this.data }));
 
             if (!response.ok) {
                 throw new Error(String(this.failMessage));
