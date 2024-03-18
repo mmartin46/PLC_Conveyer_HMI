@@ -38,6 +38,40 @@ def index():
         
     return f'GET={get_counter} POST={post_counter}'
 
+@main_bp.route('/read-light-status', methods=['POST'])
+def read_light_status():
+    global get_counter, post_counter
+    post_counter += 1
+    write_to_file(datetime.now().time(), get_counter, post_counter)
+    
+    try:
+        with PLC() as comm:
+            comm.IPAddress = IP_ADDRESS
+            
+            data = request.json
+            color = data['color']
+            
+            ret = comm.Read(stack_light_tags[color])
+            print(ret.TagName, ret.Value, ret.Status)
+            
+            if ret.Value == True:
+                v = 1
+            else:
+                v = 0
+                        
+            # Sets data for the given light
+            light_status = {
+                'value' : v
+            }
+            
+            return jsonify(light_status), 200
+    except Exception as e:
+        return jsonify({'error' : str(e)})
+ 
+    
+    
+    
+
 @main_bp.route('/connect-to-plc', methods=['POST'])
 def connect_to_plc():
     global get_counter, post_counter

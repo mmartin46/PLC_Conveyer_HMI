@@ -1,5 +1,5 @@
 import Button from './Button'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import '../App.css'
 
@@ -28,7 +28,43 @@ const ButtonList = () => {
     } catch (error) {
       console.error('Failed to connect to PLC', error);
     }
-  }    
+  }
+  
+  // Reads the current light value and
+  // sets the button based off of the value read.
+  const readLightValue = async (color) => {
+    try {
+      const response = await fetch('http://192.168.0.254:8081/read-light-status', {
+        method: 'POST',
+        headers : {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'color' : color.toLowerCase(),
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Connected failed');
+      }
+
+      const data = await response.json();
+
+      // Update lights based on value read.
+      setLights(prevLights => ({
+        ...prevLights,
+        [color]: data.value === 1
+      }));
+    } catch (error) {
+      console.error('Failed to connect', error);
+    }
+  };
+
+  useEffect(() => {
+    Object.keys(lights).forEach(color => {
+      readLightValue(color);
+    });
+  }, []);
 
 
   // Connects to the PLC and turns lights on
